@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prescription Vault | HealthBridge AI</title>
+  <meta name="description" content="Secure Prescription Vault: upload doctor prescriptions, extract structured medicine details, and maintain your clinical records.">
+  <meta name="theme-color" content="#060c19">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="bg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="orb-float a" aria-hidden="true"></div>
+  <div class="orb-float b" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="HealthBridge AI home">
+      <b>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12h4l3-8 4 16 3-8h4" />
+        </svg>
+      </b>
+      <span>HealthBridge AI</span>
+    </a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><span></span></button>
+    <nav id="menu" class="menu" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="timeline.html">Timeline</a>
+      <a href="history.html">History</a>
+      <a href="prescription.html" aria-current="page">Vault</a>
+      <a href="allergies.html">Allergies</a>
+      <a href="recommendation.html">Guidance</a>
+      <a href="briefing.html">Doctor Briefing</a>
+    </nav>
+  </header>
+
+  <main id="main" class="container">
+    <!-- Page Header -->
+    <div style="margin: 1.5rem 0 1rem;">
+      <h1 class="ptitle" style="margin:0 0 .3rem">Prescription Vault</h1>
+      <p class="psub" style="margin:0">Securely upload doctor prescriptions, organize medications, and maintain a structured clinical collection.</p>
+    </div>
+
+    <!-- 1. LARGE UPLOAD CONTAINER AT THE TOP (Section 2.A) -->
+    <section class="vault-upload-container glass tilt" aria-labelledby="upload-heading" id="vault-upload-section">
+      <div class="vault-upload-hero">
+        <h2 id="upload-heading">Upload Prescription</h2>
+        <p>Attach an official prescription image or PDF (up to 10 MB). Preview your file, record structured clinical details, and save safely to your private vault.</p>
+      </div>
+
+      <!-- Upload Form -->
+      <form id="vault-upload-form" novalidate>
+        <!-- Two Upload Options: Option A (Take a Photo) & Option B (Upload from Device) -->
+        <div id="vault-options-container" class="vault-upload-options-grid">
+          <!-- Option A: Take a Photo -->
+          <div class="vault-option-card vault-camera-card" id="camera-option-card" tabindex="0" role="button" aria-label="Take a photo of prescription using camera">
+            <div class="vault-option-badge">Direct Capture</div>
+            <div class="vault-option-icon camera-icon-glow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+            </div>
+            <h3 class="vault-option-title">Take a Photo</h3>
+            <p class="vault-option-desc">Photograph your medical prescription directly using your device's camera with document alignment guidance.</p>
+            <div class="vault-option-actions">
+              <button type="button" class="btn p vault-action-btn" id="start-camera-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+                Take Photo
+              </button>
+            </div>
+            <!-- Hidden mobile direct capture input -->
+            <input type="file" id="camera-file-input" accept="image/*" capture="environment" style="display:none" aria-label="Direct camera photo capture">
+          </div>
+
+          <!-- Option B: Upload from Device -->
+          <div class="vault-option-card vault-file-card" id="device-option-card" tabindex="0" role="button" aria-label="Upload prescription from device files or gallery">
+            <div class="vault-option-badge file-badge">Gallery & Files</div>
+            <div class="vault-option-icon file-icon-glow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <h3 class="vault-option-title">Upload from Device</h3>
+            <p class="vault-option-desc">Select existing prescription photos or PDF documents from your gallery or file storage (up to 10 MB).</p>
+            <div class="vault-option-actions">
+              <button type="button" class="btn vault-action-btn" id="trigger-file-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                Upload from Gallery
+              </button>
+            </div>
+            <input type="file" id="prescription-file-input" accept=".pdf,.jpg,.jpeg,.png" style="display:none" aria-label="Prescription file input">
+          </div>
+        </div>
+
+        <!-- Sleek Drag & Drop Strip -->
+        <div class="vault-drop-strip" id="vault-dropzone" tabindex="0" role="button" aria-label="Drop prescription file here">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;color:var(--aqua)">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          <span>Or drag and drop prescription file here (PDF, JPG, PNG up to 10 MB)</span>
+        </div>
+
+        <!-- Selected File Preview Card (Displayed when a file is selected) -->
+        <div id="dropzone-file-preview" class="vault-preview-card" style="display:none">
+          <div class="vault-preview-left">
+            <div id="preview-thumb-box" class="vault-thumb-wrap">
+              <!-- Rendered dynamically (image thumbnail or PDF icon) -->
+            </div>
+            <div class="vault-file-meta-col">
+              <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+                <span id="preview-filename" class="vault-file-name">filename.pdf</span>
+                <span id="preview-source-badge" class="vault-source-badge" style="display:none">📸 Camera Capture</span>
+              </div>
+              <div class="vault-file-size-type">
+                <span id="preview-filesize">0 MB</span>
+                <span>•</span>
+                <span id="preview-filetype" class="vault-type-tag">PDF</span>
+              </div>
+            </div>
+          </div>
+          <div class="vault-preview-actions">
+            <button id="retake-photo-btn" type="button" class="btn btn-sm p" style="display:none">📷 Retake Photo</button>
+            <button id="extract-ocr-btn" type="button" class="btn btn-sm" style="background:rgba(0,212,170,.12);border:1px solid var(--aqua);color:var(--aqua);font-weight:700">✨ Extract with AI</button>
+            <button id="replace-file-btn" type="button" class="btn btn-sm">Choose Another File</button>
+            <button id="remove-file-btn" type="button" class="btn btn-sm btn-danger">Remove</button>
+          </div>
+        </div>
+
+        <!-- Extraction Notice Banner -->
+        <div id="vault-extraction-banner" class="form-state-box info" style="display:none;margin-bottom:1.2rem;border-color:var(--aqua);">
+          <span style="font-size:1.3rem">🔍</span>
+          <div style="flex:1">
+            <div style="font-weight:700;color:var(--aqua)" id="extraction-status-title">Candidate details extracted by AI</div>
+            <div style="font-size:.82rem;color:var(--text);margin-top:.2rem" id="extraction-status-desc">
+              Please review and verify all candidate fields below before saving. Extracted items are marked as unverified until confirmed by you.
+            </div>
+          </div>
+        </div>
+
+        <!-- Structured Prescription Details Fields -->
+        <div class="vault-fields-grid">
+          <div class="vault-field-group">
+            <label for="vault-title">
+              <span>🔖</span> Prescription Title (Optional)
+            </label>
+            <input type="text" id="vault-title" name="title" placeholder="e.g. Cardiology Visit, Regular Consultation">
+          </div>
+
+          <div class="vault-field-group">
+            <label for="vault-problem">
+              <span>🩺</span> Main Health Problem (Optional)
+            </label>
+            <input type="text" id="vault-problem" name="main_health_problem" placeholder="e.g. Hypertension, Seasonal Flu, Chest Pain">
+          </div>
+
+          <div class="vault-field-group">
+            <label for="vault-doctor">
+              <span>👨‍⚕️</span> Doctor Name (Optional)
+            </label>
+            <input type="text" id="vault-doctor" name="doctor_name" placeholder="e.g. Dr. Sarah Jenkins, MD">
+          </div>
+
+          <div class="vault-field-group">
+            <label for="vault-date">
+              <span>📅</span> Prescription Date (Optional)
+            </label>
+            <input type="date" id="vault-date" name="prescription_date">
+          </div>
+
+          <div class="vault-field-group">
+            <label for="vault-hospital">
+              <span>🏥</span> Hospital or Clinic (Optional)
+            </label>
+            <input type="text" id="vault-hospital" name="hospital_name" placeholder="e.g. City Heart & Health Center">
+          </div>
+
+          <div class="vault-field-group">
+            <label for="vault-diagnosis">
+              <span>📋</span> Clinical Diagnosis (Optional)
+            </label>
+            <input type="text" id="vault-diagnosis" name="diagnosis" placeholder="e.g. Essential Primary Hypertension">
+          </div>
+
+          <div class="vault-field-group" style="grid-column: 1 / -1">
+            <label for="vault-notes">
+              <span>📝</span> Dosage & Instructions / Notes (Optional)
+            </label>
+            <input type="text" id="vault-notes" name="notes" placeholder="e.g. Take with warm water after meals; review in 3 weeks">
+          </div>
+        </div>
+
+        <!-- Prescribed Medicines Section -->
+        <div style="margin: 1.8rem 0 1.2rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;flex-wrap:wrap;gap:.5rem">
+            <div>
+              <h3 style="margin:0;font-size:1.05rem;color:var(--aqua)">Prescribed Medicines</h3>
+              <p style="margin:0;font-size:.82rem;color:var(--mute)">List individual medicines, dosages, and administration frequencies.</p>
+            </div>
+            <button id="add-med-row-btn" class="btn btn-sm" type="button">+ Add Medicine</button>
+          </div>
+
+          <div id="medicines-container">
+            <!-- Dynamic medicine rows generated here -->
+          </div>
+        </div>
+
+        <!-- Upload Progress Bar Indicator -->
+        <div id="vault-upload-progress" class="vault-upload-progress-wrap" style="display:none" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress-label-row">
+            <span id="upload-progress-text">Uploading prescription to secure vault...</span>
+            <span id="upload-progress-percent">0%</span>
+          </div>
+          <div class="progress-track">
+            <div id="upload-progress-bar" class="progress-bar-fill" style="width:0%"></div>
+          </div>
+        </div>
+
+        <!-- Form Status Box (Loading, Success, Error) -->
+        <div id="vault-upload-status" style="display:none" class="form-state-box" role="alert" aria-live="polite"></div>
+
+        <!-- Form Action Controls -->
+        <div style="display:flex;gap:.8rem;justify-content:flex-end;margin-top:1.4rem;align-items:center;flex-wrap:wrap">
+          <button id="cancel-upload-btn" class="btn" type="button">Cancel</button>
+          <button id="submit-vault-btn" class="btn p" type="submit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+              <polyline points="17 21 17 13 7 13 7 21"/>
+              <polyline points="7 3 7 8 15 8"/>
+            </svg>
+            Save Prescription
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- 2. SAVED PRESCRIPTION CARDS (Section 2.B) -->
+    <section class="prescriptions-section" aria-labelledby="vault-collection-heading">
+      <div class="prescriptions-section-head">
+        <div>
+          <h2 id="vault-collection-heading">
+            <span>🗂️</span> My Prescriptions
+          </h2>
+          <p style="margin:.2rem 0 0;color:var(--mute);font-size:.9rem">Chronological archive of all your saved prescriptions and medication records.</p>
+        </div>
+        <div id="vault-count-badge" style="font-size:.85rem;color:var(--aqua);font-weight:700"></div>
+      </div>
+
+      <!-- Prescriptions Grid Container -->
+      <div id="vault-list-container" class="prescriptions-grid" aria-live="polite">
+        <div class="glass empty-card" style="grid-column: 1 / -1; text-align:center; padding: 3rem 1.5rem;">
+          <p>Loading prescription vault records...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. PRESCRIPTION DETAILS MODAL (Section 2.C) -->
+    <div id="prescription-detail-modal" class="vault-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-presc-title">
+      <div class="vault-modal-box">
+        <div class="vault-modal-header">
+          <h3 id="modal-presc-title">
+            <span>📄</span> Prescription Details
+          </h3>
+          <button type="button" class="vault-modal-close" id="close-detail-modal-btn" aria-label="Close details modal">&times;</button>
+        </div>
+
+        <div class="vault-modal-body" id="modal-presc-body">
+          <!-- Populated dynamically via prescription.js -->
+        </div>
+
+        <div class="vault-modal-footer">
+          <div id="modal-file-link-container"></div>
+          <div style="display:flex;gap:.6rem;align-items:center">
+            <button type="button" class="btn btn-sm btn-danger" id="modal-delete-presc-btn">Delete Prescription</button>
+            <button type="button" class="btn btn-sm" id="modal-edit-toggle-btn">Edit Details</button>
+            <button type="button" class="btn btn-sm p" id="modal-close-btn">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div id="confirm-delete-modal" class="vault-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="confirm-delete-title">
+      <div class="vault-modal-box" style="max-width: 440px;">
+        <div class="vault-modal-header">
+          <h3 id="confirm-delete-title" style="color:var(--crit)">
+            <span>⚠️</span> Confirm Deletion
+          </h3>
+          <button type="button" class="vault-modal-close" id="cancel-delete-modal-btn" aria-label="Cancel deletion">&times;</button>
+        </div>
+        <div class="vault-modal-body" style="padding:1.4rem;">
+          <p style="margin:0 0 1rem;font-size:.95rem;color:var(--text);line-height:1.5">
+            Are you sure you want to permanently delete this prescription and its associated file from your vault?
+          </p>
+          <p style="margin:0;font-size:.85rem;color:var(--mute)">
+            This action cannot be undone.
+          </p>
+        </div>
+        <div class="vault-modal-footer" style="justify-content:flex-end;gap:.6rem">
+          <button type="button" class="btn btn-sm" id="abort-delete-btn">Cancel</button>
+          <button type="button" class="btn btn-sm btn-danger" id="execute-delete-btn">Yes, Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. LIVE CAMERA CAPTURE MODAL -->
+    <div id="camera-modal" class="vault-modal-overlay camera-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="camera-modal-title" style="display:none">
+      <div class="camera-modal-box">
+        <div class="camera-modal-header">
+          <div style="display:flex;align-items:center;gap:.6rem">
+            <span class="camera-live-pulse" aria-hidden="true"></span>
+            <h3 id="camera-modal-title" style="margin:0;font-size:1.1rem;color:var(--text);display:flex;align-items:center;gap:.4rem">
+              <span>📷</span> Prescription Camera Scanner
+            </h3>
+          </div>
+          <div style="display:flex;align-items:center;gap:.6rem">
+            <button type="button" id="switch-camera-btn" class="btn btn-sm" title="Switch front/rear camera" style="display:none">
+              🔄 Switch Camera
+            </button>
+            <button type="button" id="close-camera-modal-btn" class="vault-modal-close" aria-label="Close camera modal">&times;</button>
+          </div>
+        </div>
+
+        <div class="camera-viewfinder-container">
+          <!-- Video element for live stream -->
+          <video id="camera-video" autoplay playsinline muted></video>
+          <canvas id="camera-canvas" style="display:none"></canvas>
+
+          <!-- Framing guide overlay -->
+          <div class="camera-guide-overlay" id="camera-guide-overlay">
+            <div class="camera-corner top-left"></div>
+            <div class="camera-corner top-right"></div>
+            <div class="camera-corner bottom-left"></div>
+            <div class="camera-corner bottom-right"></div>
+            <div class="camera-guide-text">Align prescription document within frame</div>
+          </div>
+
+          <!-- Loading state overlay -->
+          <div id="camera-loading-overlay" class="camera-state-overlay">
+            <div class="camera-spinner"></div>
+            <p id="camera-status-text" style="margin-top:.8rem;color:var(--text);font-size:.92rem">Starting camera...</p>
+          </div>
+
+          <!-- Error / Permission fallback overlay -->
+          <div id="camera-error-overlay" class="camera-state-overlay" style="display:none">
+            <div style="font-size:2.4rem;margin-bottom:.5rem">📸🚫</div>
+            <h4 style="margin:0 0 .4rem;color:#ff6b6b">Camera Access Blocked or Unavailable</h4>
+            <p id="camera-error-desc" style="color:var(--mute);font-size:.85rem;max-width:320px;margin:0 0 1rem;line-height:1.4">
+              Camera access is denied or not supported in this browser context. You can still photograph your prescription using the direct device camera option.
+            </p>
+            <div style="display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center">
+              <button type="button" id="fallback-capture-btn" class="btn btn-sm p">
+                📷 Open Device Camera App
+              </button>
+              <button type="button" id="camera-error-dismiss-btn" class="btn btn-sm">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Camera bottom controls bar -->
+        <div class="camera-controls-bar">
+          <button type="button" id="camera-cancel-btn" class="btn btn-sm">Cancel</button>
+          <div class="camera-shutter-wrapper">
+            <button type="button" id="shutter-btn" class="camera-shutter-btn" title="Capture prescription photo" aria-label="Capture prescription photo">
+              <span class="camera-shutter-inner"></span>
+            </button>
+          </div>
+          <button type="button" id="camera-device-fallback-btn" class="btn btn-sm" title="Upload from device files instead">
+            📁 From Gallery
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site">AI-generated information is not a replacement for professional medical advice.</footer>
+  <script src="api.js" defer></script>
+  <script src="common.js" defer></script>
+  <script src="prescription.js" defer></script>
+</body>
+
+</html>
